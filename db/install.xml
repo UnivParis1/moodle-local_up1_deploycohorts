@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/up1_deploycohorts/db" VERSION="20150518" COMMENT="XMLDB file for Moodle local/up1_deploycohorts"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="cohort_deployed_history" COMMENT="Stores all cohorts deployed by this plugin">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="enrol_ids"/>
+        <FIELD NAME="enrol_ids" TYPE="text" NOTNULL="true" SEQUENCE="false" NEXT="role"/>
+        <FIELD NAME="role" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" NEXT="userid"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" NEXT="id_de_cohortes"/>
+        <FIELD NAME="category" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" NEXT="id_de_cours"/>
+        <FIELD NAME="id_de_cohortes" TYPE="text" NOTNULL="true" SEQUENCE="false" NEXT="id_de_cours"/>
+        <FIELD NAME="id_de_cours" TYPE="text" NOTNULL="true" SEQUENCE="false" NEXT="date_deploiement"/>
+
+        <FIELD NAME="date_deploiement" TYPE="datetime" LENGTH="50" NOTNULL="true" SEQUENCE="false" PREVIOUS="id_de_cours"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
