@@ -306,7 +306,7 @@ function getEnrolids($id) {
 	return '';
 }
 
-function getRoleAndCourseAndCohort($id);
+function getRoleAndCourseAndCohort($id){
 	global $DB;
         $SELECT = "     SELECT role, id_de_cours,id_de_cohortes  FROM {cohort_deployed_history} where id=?";
         $obj= $DB->get_record_sql($SELECT,array($id));
