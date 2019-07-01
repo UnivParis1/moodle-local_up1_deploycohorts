@@ -72,6 +72,29 @@ function getCohortesLikeTerm($term) {
     return $listeCohortes;
 }
 
+
+
+/**
+ * 
+ * Retourne l'ensemble des cohortes manuelles contenant le terme $term
+ * @param integer $term
+ * @return array 
+ */
+function getMembersCohort($cohortid) {
+	global $DB;
+	$SELECT = "	SELECT userid
+        	FROM {cohort_members} C 
+        	WHERE cohortid = ?";
+	$obj= $DB->get_records_sql($SELECT, array($cohortid));
+	$members = array();
+	foreach($obj as $i=> $row) {
+		$members[] = $row->userid
+	}
+	
+    return $members;
+}
+
+
 /**
  * 
  * Retourne l'ensemble des rôles ou le rôle ayant pour identifiant $idrole
@@ -95,6 +118,8 @@ function getRoles($idrole = 0) {
 	}
     return null;
 }
+
+
 
 
 /**
@@ -283,6 +308,15 @@ function insertionCohortes($formdata) {
     					$id_de_cohortes .= ','.$cohorte;
     					$id_de_cours 	.= ','.$EPI[0];
     				}
+    				$members = getMembersCohort($cohorte);
+    				for($z=0;$z<count($members);$z++) {
+    					$INSERT = "INSERT INTO {user_enrolments} 
+    								(enrolid,userid) 
+    								VALUES ($last_insert_id,".$members[$z].")";
+						$DB->execute($INSERT);
+
+    				}
+
     				$cpt ++;
 				}
 			}
