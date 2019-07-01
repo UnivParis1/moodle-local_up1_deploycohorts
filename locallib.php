@@ -88,7 +88,7 @@ function getMembersCohort($cohortid) {
 	$obj= $DB->get_records_sql($SELECT, array($cohortid));
 	$members = array();
 	foreach($obj as $i=> $row) {
-		$members[] = $row->userid
+		$members[] = $row->userid;
 	}
 	
     return $members;
